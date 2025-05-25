@@ -136,7 +136,7 @@ const CreatePost=async(req,res)=>{
 }
 
 const DeletePost=async(req,res,next)=>{
-    try {
+    try { 
         const {post_id}=req.params
     
         if(!post_id){

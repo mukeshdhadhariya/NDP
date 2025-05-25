@@ -27,6 +27,7 @@ function CreateU() {
 
 
   const handleSubmit = async (e) => {
+    
     e.preventDefault();
     const formDataToSend = new FormData();
     formDataToSend.append("username", formData.username);
@@ -35,6 +36,7 @@ function CreateU() {
     formDataToSend.append("facebookUrl", formData.facebookUrl);
     formDataToSend.append("jobprofile", formData.jobprofile);
     formDataToSend.append("image", formData.file); 
+
     try {
       const res = await axios.post(
         "http://localhost:8000/api/v1/user/createuser",

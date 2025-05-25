@@ -10,9 +10,9 @@ function DeleteU() {
   const [users, setUsers] = useState([]);
   const [isFetched, setIsFetched] = useState(false); 
 
-  const user = useSelector((state) => state.auth.user);
+  const adminUser = useSelector((state) => state.auth.user);
 
-  if(!user){
+  if(!adminUser){
     return navigate("/login");
   }
 
