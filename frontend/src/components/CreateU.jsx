@@ -4,8 +4,10 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
+
 function CreateU() {
 
+  const [loading, setLoading] = useState(false);
   const navigate=useNavigate();
   const [formData, setFormData] = useState({
     username: "",
@@ -29,6 +31,9 @@ function CreateU() {
   const handleSubmit = async (e) => {
     
     e.preventDefault();
+
+    setLoading(true);
+
     const formDataToSend = new FormData();
     formDataToSend.append("username", formData.username);
     formDataToSend.append("instaUrl", formData.instaUrl);
@@ -64,7 +69,10 @@ function CreateU() {
 
     } catch (error) {
       console.error("Error:", error.response ? error.response.data : error.message);
-    }
+      toast.error("Failed to create user.");
+    }finally {
+    setLoading(false);
+  }
   };
 
   return (
@@ -154,10 +162,35 @@ function CreateU() {
 
           <button
             type="submit"
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-lg font-bold transition-all"
+            disabled={loading}
+            className={`w-full flex justify-center items-center gap-2 ${
+              loading ? "bg-blue-400 cursor-not-allowed" : "bg-blue-600 hover:bg-blue-700"
+            } text-white p-2 rounded-lg font-bold transition-all`}
           >
-            Create User
+            {loading ? (
+              <>
+                <svg className="animate-spin h-5 w-5 text-white" viewBox="0 0 24 24">
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  />
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+                  />
+                </svg>
+                Creating...
+              </>
+            ) : (
+              "Create User"
+            )}
           </button>
+          
         </form>
       </div>
     </div>

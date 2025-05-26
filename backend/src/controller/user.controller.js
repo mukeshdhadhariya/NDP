@@ -84,7 +84,12 @@ try {
         });
 
 } catch (error) {
-    console.log("login error",error)
+        return res
+        .status(400)
+        .json({
+            message: `You are not admin`,
+            success: false,
+        });
 }
     
 
@@ -133,6 +138,32 @@ const CreatePost=async(req,res)=>{
         new ApiResponce(200,newpost,"post created")
     )
 
+}
+
+const PostLike=async(req,res)=>{
+    try {
+    const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    const post = await Post.findById(req.params.postId);
+
+    if (!post) return res.status(404).send("Post not found");
+
+    const index = post.likedIPs.indexOf(ip);
+
+    if (index === -1) {
+      post.likes += 1;
+      post.likedIPs.push(ip);
+    } else {
+      post.likes = Math.max(0, post.likes - 1);
+      post.likedIPs.splice(index, 1);
+    }
+
+    await post.save();
+    
+    res.status(200).json({ likes: post.likes, liked: index === -1 });
+
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 }
 
 const DeletePost=async(req,res,next)=>{
@@ -330,5 +361,6 @@ export {
     createUser,
     getalluser,
     deleteuser,
-    SendMail
+    SendMail,
+    PostLike
 }

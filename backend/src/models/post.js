@@ -8,7 +8,12 @@ const PostSchema=new mongoose.Schema({
     caption:{
         type:String, 
         default:''
-    }
+    },
+    likes: { 
+        type: Number, 
+        default: 0 
+    },
+    likedIPs: [String]
 },
 {
     timestamps:true

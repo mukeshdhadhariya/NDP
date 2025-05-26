@@ -4,6 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setAuthUser } from "../redux/authSlice.js";
+import { toast } from "sonner";
 
 
 const AdminLogin = () => {
@@ -36,9 +37,31 @@ const AdminLogin = () => {
         navigate("/admin")
         setAdminName("")
         setPassword("")
-      }
+        toast.success('Admin Login', {
+          style: {
+            backgroundColor: '#000',     // Black background
+            color: '#00ff99',            // Bright green text
+            fontWeight: 'bold',
+            border: 'none',
+            borderRadius: '8px',
+            padding: '12px',
+          },
+          duration: 3000,
+        });
 
+      }
     } catch (error) {
+      toast('⚠️ You are not Admin', {
+        style: {
+          backgroundColor: '#000',       // Black background
+          color: '#ffcc00',              // Yellow text
+          fontWeight: 'bold',
+          border: 'none',
+          borderRadius: '8px',
+          padding: '12px',
+        },
+        duration: 3000, // optional: how long it stays (in ms)
+      });
       console.error("Error:", error.response ? error.response.data : error.message);
     }
   };

@@ -69,7 +69,7 @@ function DeleteP() {
     } catch (error) {
       console.error("Error:", error.response ? error.response.data : error.message);
     }
-  };
+    };
 
 
 
