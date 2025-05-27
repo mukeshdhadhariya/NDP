@@ -11,6 +11,7 @@ import CreateU from "./components/CreateU"
 import DeleteP from "./components/DeleteP"
 import DeleteU from "./components/DeleteU"
 import Hackerimg from "./components/Hackerimg"
+import Message from "./components/Message"
 
 const broserRouter=createBrowserRouter([
   {
@@ -33,6 +34,9 @@ const broserRouter=createBrowserRouter([
     },{
       path:'/special',
       element:<Special/>
+    },{
+      path:'/message',
+      element:<Message/>
     }]
   },{
     path:"/admin",

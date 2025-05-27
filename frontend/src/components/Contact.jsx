@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { MessageSquare, Send } from "lucide-react";
+import { MessageSquare, MessagesSquare, Send } from "lucide-react";
 import { FaUser, FaComment } from "react-icons/fa";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import axios from "axios";
@@ -38,9 +38,9 @@ export default function MessageForm() {
   return (
     <div className="text-white flex flex-col p-4 justify-center items-center py-30">
       <div className="bg-white/10 p-6 rounded-2xl shadow-xl w-full max-w-md">
-        <h1 className="text-xl font-bold flex items-center gap-2 mb-4">
-          <MessageSquare /> Admin Contact
-        </h1>
+        <h2 className=" text-center text-2xl mb-4 bg-gradient-to-r from-red-400 via-blue-400 to-green-400 bg-clip-text text-transparent">
+        Admin Contact
+        </h2>
         <form onSubmit={messageHandle}> 
           <div className="flex items-center gap-2 mb-3 bg-gray-700 p-2 rounded-md border border-gray-600">
             <FaUser className="text-gray-400" />

@@ -134,8 +134,9 @@ const CreatePost=async(req,res)=>{
         image:ImageUrl.url
     })
 
-    return res.status(200).json(
-        new ApiResponce(200,newpost,"post created")
+    return res.status(200).json({
+        message:"Post created"
+    }
     )
 
 }
@@ -362,5 +363,5 @@ export {
     getalluser,
     deleteuser,
     SendMail,
-    PostLike
+    PostLike,
 }

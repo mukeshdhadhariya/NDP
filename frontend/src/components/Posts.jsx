@@ -7,7 +7,7 @@ function Posts() {
   const [posts, setPosts] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Fetch posts when component mounts
+
   useEffect(() => {
     const fetchPosts = async () => {
       try {

@@ -33,7 +33,6 @@ function Profiles() {
 
   return (
     <div className="w-full max-w-md mx-auto">
-      <div className="sticky top-13 z-10 text-gray-200 flex justify-center"> All NDP Family</div>
 
       {loading ? (
         <div className="flex justify-center items-center h-[75vh]">

@@ -66,15 +66,10 @@ const AdminLogin = () => {
     }
   };
 
-
-
-
-
-
   return (
-    <div className="flex justify-center items-center py-30">
+    <div className="flex justify-center items-center py-30 ">
       <div className="bg-white/10 p-6 rounded-lg shadow-lg w-80 sm:w-96">
-        <h2 className="text-white text-center text-2xl mb-4">Admin Login</h2>
+        <h2 className=" text-center text-2xl mb-4 bg-gradient-to-r from-red-400 via-blue-400 to-green-400 bg-clip-text text-transparent">Admin Login</h2>
 
         <form onSubmit={loginHandler}>
           <input

@@ -6,14 +6,14 @@ function Special() {
     const navigate = useNavigate();
     const [progress, setProgress] = useState(0);
     const [isPaused, setIsPaused] = useState(false);
-    const [timeLeft, setTimeLeft] = useState(5000); 
+    const [timeLeft, setTimeLeft] = useState(5000);
 
     useEffect(() => {
-        if (isPaused) return; 
+        if (isPaused) return;
 
         const interval = setInterval(() => {
-            setProgress(prev => (prev < 100 ? prev + 2 : 100)); 
-            setTimeLeft(prev => Math.max(prev - 100, 0)); 
+            setProgress(prev => Math.min(prev + 2, 100));
+            setTimeLeft(prev => Math.max(prev - 100, 0));
         }, 100);
 
         const timer = setTimeout(() => {
@@ -25,31 +25,49 @@ function Special() {
             clearTimeout(timer);
         };
     }, [isPaused, navigate, timeLeft]);
-   
-    const handlePause = () => setIsPaused(true);
 
+    const handlePause = () => setIsPaused(true);
     const handleResume = () => setIsPaused(false);
 
     return (
         <div 
-            className=' text-gray-400 h-[80vh] text-center text-xl select-none'
+            className="fixed pt-20 min-h-screen bg-gray-900 text-gray-300 select-none"
             onMouseDown={handlePause} 
             onMouseUp={handleResume}
             onTouchStart={handlePause}
             onTouchEnd={handleResume}
         >
-            <div className="w-full h-0.5  mt-[-7px] rounded">
-                <div
-                    className="h-full bg-blue-500 rounded"
-                    style={{
-                        width: `${progress}%`,
-                        transition: isPaused ? "none" : "width 0.1s linear"
-                    }}
-                ></div>
+            {/* Progress Bar - Fixed position below navbar */}
+            <div className="fixed top-16 left-0 w-full px-4 z-40 bg-gray-900/80 backdrop-blur-sm">
+                <div className="w-full h-2 bg-gray-700 rounded-full overflow-hidden">
+                    <div
+                        className="h-full bg-gradient-to-r from-blue-500 to-purple-500 rounded-full transition-all duration-100"
+                        style={{
+                            width: `${progress}%`,
+                            transition: isPaused ? 'none' : 'width 0.1s linear, filter 0.3s ease',
+                            filter: isPaused ? 'brightness(0.8)' : 'brightness(1) drop-shadow(0 0 4px rgba(59, 130, 246, 0.3))'
+                        }}
+                    >
+                        <div className="absolute right-0 top-0 h-full w-4 bg-white/20 animate-pulse" />
+                    </div>
+                </div>
+                <p className="text-center text-sm mt-2 text-gray-400">
+                    {isPaused ? (
+                        <span className="inline-flex items-center gap-2 bg-gray-800 px-3 py-1 rounded-full">
+                            ⏸ Paused
+                        </span>
+                    ) : (
+                        <span className="inline-flex items-center gap-2 bg-gray-800 px-3 py-1 rounded-full">
+                            ⏵ Hold to pause
+                        </span>
+                    )}
+                </p>
             </div>
-            <p className="mt-2 text-sm">Press & Hold to Pause</p>
-            
-                <SpecialContainer/>
+
+            {/* Content */}
+            <div className="h-[calc(100vh-10rem)] flex flex-col items-center justify-center">
+                <SpecialContainer />
+            </div>
         </div>
     );
 }
