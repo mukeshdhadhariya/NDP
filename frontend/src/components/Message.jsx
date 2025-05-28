@@ -1,75 +1,112 @@
-import { useState, useMemo, memo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
+import axios from 'axios';
 
-const MessageItem = memo(({ message }) => (
-  <div
-    className="bg-gray-800 p-3 rounded-lg transition-colors hover:bg-gray-900"
-  >
-    <p className="text-sm">{message.text}</p>
-    <div className="text-xs text-gray-400 mt-1">{message.timestamp}</div>
-  </div>
-));
+// Grouping messages by date
+const groupMessagesByDate = (messages) => {
+  return messages.reduce((acc, msg) => {
+    const dateKey = new Date(msg.createdAt).toDateString(); // e.g., "Mon May 27 2025"
+    if (!acc[dateKey]) acc[dateKey] = [];
+    acc[dateKey].push(msg);
+    return acc;
+  }, {});
+};
 
 const MessageBoard = () => {
-  const [messages, setMessages] = useState([
-    { id: 1, text: "Anyone interested in a coding meetup this weekend?", timestamp: "2023-09-25 09:30 AM" },
-    { id: 2, text: "Found a great new coffee shop downtown! ☕", timestamp: "2023-09-25 08:45 AM" },
-    { id: 3, text: "Looking for recommendations for a good dentist in the area.", timestamp: "2023-09-24 05:15 PM" },
-    { id: 4, text: "Anyone interested in a coding meetup this weekend?", timestamp: "2023-09-25 09:30 AM" },
-  ]);
-
+  const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
 
   const pinnedMessage = useMemo(() => ({
     id: 0,
-    text: "📌 Welcome to our community board! Please read the guidelines before posting.",
-    timestamp: "2023-09-20 10:00 AM",
+    msg: "📌 Welcome to our community board! Please read the guidelines before posting.",
+    createdAt: "2023-09-20T10:00:00Z",
     pinned: true,
   }), []);
 
-  const handleSend = () => {
-    if (newMessage.trim()) {
-      const newMsg = {
-        id: Date.now(),
-        text: newMessage,
-        timestamp: new Date().toLocaleString(),
-      };
-      setMessages(prev => [...prev, newMsg]);
-      setNewMessage('');
+  const fetchMessages = async () => {
+    try {
+      const res = await axios.get('http://localhost:8000/api/v1/user/getallmsg', {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      });
+      setMessages(res.data.messages);
+    } catch (err) {
+      console.error("Error fetching messages", err);
     }
   };
 
+  useEffect(() => {
+    fetchMessages();
+  }, []);
+
+  const handleSend = async () => {
+    if (!newMessage.trim()) return;
+    try {
+      await axios.post('http://localhost:8000/api/v1/user/createmsg', {
+        msg: newMessage
+      }, {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      });
+      setNewMessage('');
+      fetchMessages(); // refresh messages
+    } catch (error) {
+      console.error("Error sending message", error);
+    }
+  };
+
+  const groupedMessages = groupMessagesByDate([pinnedMessage, ...messages]);
+
   return (
     <div className="bg-black text-white flex flex-col max-h-[73vh]">
-      {/* Pinned Message Header */}
+      {/* Pinned Header */}
       <div className="fixed top-0 left-0 right-0 bg-gray-900 z-20 border-l-4 border-blue-500 shadow-sm">
         <div className="max-w-4xl mx-auto px-4 py-3">
           <h2 className="text-blue-400 text-base md:text-lg font-semibold mb-1 flex items-center gap-2">
             <span>📌</span> Pinned Message
           </h2>
-          <p className="text-gray-300 text-sm">{pinnedMessage.text}</p>
+          <p className="text-gray-300 text-sm">{pinnedMessage.msg}</p>
         </div>
       </div>
 
       {/* Scrollable Messages */}
       <div
-        className="max-w-4xl mx-auto w-full px-4 mt-10 mb-5 space-y-4 overflow-y-auto"
+        className="max-w-4xl mx-auto w-full px-3 mt-7 space-y-4 overflow-y-auto"
         style={{
-          // Make the scroll container take full height minus header & footer height
           height: 'calc(100vh - 96px)',
-
-          // Important: add top padding equal to pinned header height (~72px) so messages start below pinned message
           paddingTop: '72px',
-
           willChange: 'transform',
           WebkitOverflowScrolling: 'touch',
         }}
       >
-        {messages.map(message => (
-          <MessageItem key={message.id} message={message} />
+        {Object.entries(groupedMessages).map(([date, msgs]) => (
+          <div key={date}>
+            <div className="text-center text-gray-400 text-xs py-1">
+              {new Date(date).toLocaleDateString(undefined, {
+                weekday: 'short',
+                day: 'numeric',
+                month: 'short',
+                year: 'numeric',
+              })}
+            </div>
+            {msgs.map((message) => (
+              <div
+                key={message._id || message.id}
+                className="bg-gray-800 px-4 py-2 rounded-lg transition-colors hover:bg-gray-900 mb-2"
+              >
+                <p className="text-sm">{message.msg}</p>
+                <div className="text-xs text-gray-500 mt-1 text-right block">
+                  {new Date(message.createdAt).toLocaleTimeString([], {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                  })}
+                </div>
+              </div>
+            ))}
+          </div>
         ))}
       </div>
 
-      {/* Fixed Footer Input */}
+      {/* Fixed Input */}
       <div className="fixed bottom-0 left-0 right-0 bg-gray-900 z-30 border-t border-gray-700">
         <div className="max-w-4xl mx-auto px-4 py-3 flex items-center gap-2 sm:gap-4">
           <input

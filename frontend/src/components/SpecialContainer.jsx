@@ -1,21 +1,20 @@
-import React from 'react'
+import React from 'react';
 
-const imgurl="https://res.cloudinary.com/detkeq2tn/image/upload/v1742058878/wfcm5hgi7b1oigcm4tlx.jpg"
+const imgurl = "https://res.cloudinary.com/detkeq2tn/image/upload/v1742058878/wfcm5hgi7b1oigcm4tlx.jpg";
 
 const SpecialContainer = () => {
-
   return (
-    <div className="relative w-screen h-[60vh] mt-10 flex flex-col items-center justify-center">
+    <div className="w-[80vw] sm:w-[70vw] h-[60vh] sm:h-[60vh] mt-10 flex flex-col items-center justify-center">
       <img
         src={imgurl}
         alt="Centered Image"
-        className="max-w-full max-h-full object-contain pointer-events-none"
+        className="w-full max-w-[90%] sm:max-w-[85%] ml-auto object-contain pointer-events-none"
       />
-      <p className="text-2xl  text-red-500 font-bold  bg-white bg-opacity-50 px-4 py-2 rounded-lg mt-2" >
-        happy birth day pradeep
+      <p className="text-lg sm:text-2xl text-red-500 font-bold bg-white bg-opacity-70 px-3 sm:px-4 py-1 sm:py-2 rounded-lg mt-2 text-center">
+        Today is a special day
       </p>
     </div>
   );
 };
 
-export { SpecialContainer,imgurl };
+export { SpecialContainer, imgurl };

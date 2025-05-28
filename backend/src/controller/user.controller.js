@@ -6,6 +6,7 @@ import {uploadOnCloudinary} from "../utils/cloudinary.js"
 import cloudinary from "cloudinary"
 import { User } from "../models/user.js";
 import nodemailer from 'nodemailer'
+import {Message} from '../models/message.js'
 
 
 
@@ -202,7 +203,7 @@ const DeletePost=async(req,res,next)=>{
 const getallpost=async(req,res)=>{
    try {
 
-    const posts=await Post.find()
+    const posts = await Post.find().sort({ createdAt: -1 });
 
     if(!posts){
         throw new ApiError(401,"null posts")
@@ -351,6 +352,38 @@ const SendMail = async (req, res) => {
     }
 };
 
+const CreateMgs = async (req, res) => {
+  try {
+    const { msg } = req.body;
+    if (!msg) {
+      return res.status(400).json({ error: "Message content is required" });
+    }
+
+    const newMessage = await Message.create({ msg });
+
+    return res.status(201).json({
+      success: true,
+      message: newMessage,
+    });
+  } catch (error) {
+    return res.status(500).json({ error: "Failed to save message" });
+  }
+};
+
+
+const getallmessage = async (req, res) => {
+  try {
+    const messages = await Message.find().sort({ createdAt: 1 }); // Ascending (oldest to newest)
+    return res.status(200).json({
+      success: true,
+      messages,
+    });
+  } catch (error) {
+    return res.status(500).json({ error: "Failed to fetch messages" });
+  }
+};
+
+
 
 export {
     AdminRegister,
@@ -364,4 +397,6 @@ export {
     deleteuser,
     SendMail,
     PostLike,
+    getallmessage,
+    CreateMgs
 }

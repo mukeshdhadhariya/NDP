@@ -40,7 +40,7 @@ function Posts() {
       ) : posts && posts.length > 0 ? (
         posts.map((post, index) => (
           <div key={index} className="mt-2">
-            <Post url={post.image} caption={post.caption}  id={post._id} />
+            <Post url={post.image} caption={post.caption}  id={post._id} createdAt={post.createdAt} />
             <hr className="border-t border-gray-500 my-4" />
           </div>
         ))

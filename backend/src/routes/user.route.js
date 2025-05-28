@@ -10,7 +10,9 @@ import {
     getalluser,
     deleteuser,
     SendMail,
-    PostLike
+    PostLike,
+    CreateMgs,
+    getallmessage
 } from "../controller/user.controller.js"
 
 import { upload } from "../middleware/multer.js"
@@ -29,5 +31,7 @@ router.route("/deleteuser/:user_id").delete(jwtVerfy, deleteuser);
 router.route("/getalluser").get(getalluser)
 router.route("/sendmail").post(SendMail)
 router.route("/like/:postId").get(PostLike)
+router.route("/createmsg").post(CreateMgs)
+router.route("/getallmsg").get(getallmessage)
 
 export default router
