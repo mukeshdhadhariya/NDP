@@ -70,7 +70,7 @@ try {
     
         const options={
             httpOnly:true,
-            secure:true,
+            secure:false,
             sameSite:'strict',
             maxAge:1*24*60*60*1000
         }
@@ -100,7 +100,7 @@ const logout=async(req,res)=>{
     try {
         const options={
             httpOnly:true,
-            secure:true,
+            secure:false,
             sameSite:'strict',
             maxAge:0
         }
@@ -166,6 +166,22 @@ const PostLike=async(req,res)=>{
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
+}
+
+const PostLikeCnt=async(req,res)=>{
+    try {
+        const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+        const post = await Post.findById(req.params.postId);
+
+        if (!post) return res.status(404).send("Post not found");
+
+        const index = post.likedIPs.indexOf(ip);
+
+        res.status(200).json({ likes: post.likes, liked: index !== -1 });
+
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
 }
 
 const DeletePost=async(req,res,next)=>{
@@ -398,5 +414,6 @@ export {
     SendMail,
     PostLike,
     getallmessage,
-    CreateMgs
+    CreateMgs,
+    PostLikeCnt
 }

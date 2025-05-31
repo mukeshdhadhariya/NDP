@@ -12,7 +12,8 @@ import {
     SendMail,
     PostLike,
     CreateMgs,
-    getallmessage
+    getallmessage,
+    PostLikeCnt
 } from "../controller/user.controller.js"
 
 import { upload } from "../middleware/multer.js"
@@ -30,7 +31,8 @@ router.route("/createuser").post(jwtVerfy,upload.single("image"),createUser)
 router.route("/deleteuser/:user_id").delete(jwtVerfy, deleteuser);
 router.route("/getalluser").get(getalluser)
 router.route("/sendmail").post(SendMail)
-router.route("/like/:postId").get(PostLike)
+router.route("/like/:postId").post(PostLike)
+router.route("/likecnt/:postId").get(PostLikeCnt)
 router.route("/createmsg").post(CreateMgs)
 router.route("/getallmsg").get(getallmessage)
 

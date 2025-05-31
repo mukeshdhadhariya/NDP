@@ -20,7 +20,8 @@ function Post({ url, caption, id,createdAt }) {
   useEffect(() => {
     const fetchLikeStatus = async () => {
       try {
-        const res = await axios.get(`${API_URI}/api/v1/user/like/${id}`);
+        const res = await axios.get(`${API_URI}/api/v1/user/likecnt/${id}`);
+        console.log("data : ",res.data);
         setLiked(res.data.liked);
         setLikesCount(res.data.likes);
       } catch (err) {
@@ -32,7 +33,7 @@ function Post({ url, caption, id,createdAt }) {
 
   const toggleLike = async () => {
     try {
-      const res = await axios.get(`${API_URI}/api/v1/user/like/${id}`);
+      const res = await axios.post(`${API_URI}/api/v1/user/like/${id}`);
       setLikesCount(res.data.likes);
       setLiked(res.data.liked);
     } catch (error) {
