@@ -1,8 +1,8 @@
 import React from 'react';
 
-const imgurl = "https://res.cloudinary.com/detkeq2tn/image/upload/v1742058878/wfcm5hgi7b1oigcm4tlx.jpg";
+const Imgurl = "https://res.cloudinary.com/detkeq2tn/image/upload/v1742058878/wfcm5hgi7b1oigcm4tlx.jpg";
 
-const SpecialContainer = () => {
+const Specialcontainer = () => {
   return (
     <div className="w-[80vw] sm:w-[70vw] h-[60vh] sm:h-[60vh] mt-10 flex flex-col items-center justify-center">
       <img
@@ -17,4 +17,4 @@ const SpecialContainer = () => {
   );
 };
 
-export { SpecialContainer, imgurl };
+export { Specialcontainer, Imgurl };

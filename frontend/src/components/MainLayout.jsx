@@ -1,7 +1,7 @@
 import React from 'react'
-import UpperNavBar from './UpperNavBar'
+import UpperNavBar from './Uppernavbar'
 import { Outlet } from 'react-router-dom'
-import LowerNavBar from './LowerNavBar'
+import LowerNavBar from './Lowernavbar'
 
 function MainLayout() {
   return (

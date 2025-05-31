@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { SpecialContainer } from './SpecialContainer';
+import { Specialcontainer } from './Specialcontainer';
 
 function Special() {
     const navigate = useNavigate();
@@ -69,7 +69,7 @@ function Special() {
       {/* Content Section */}
       <div className="h-[calc(100vh-10rem)] w-full flex items-center justify-center  sm:px-6">
         <div className="w-full max-w-screen-lg">
-          <SpecialContainer />
+          <Specialcontainer />
         </div>
       </div>
       </div>

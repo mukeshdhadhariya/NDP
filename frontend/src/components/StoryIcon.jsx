@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { imgurl } from "./SpecialContainer";
+import { Imgurl } from "./Specialcontainer";
 
-const StoryIcon = () => {
+const Storyicon = () => {
   return (
     <Link to="/special" className="relative w-10 h-10 flex items-center justify-center">
       
@@ -21,7 +21,7 @@ const StoryIcon = () => {
       <div className="absolute w-9 h-9 bg-white rounded-full flex items-center justify-center overflow-hidden">
         
         <img 
-          src={imgurl}
+          src={Imgurl}
           alt="Story"
           className="w-full h-full rounded-full"
         />
@@ -30,4 +30,4 @@ const StoryIcon = () => {
   );
 };
 
-export { StoryIcon };
+export { Storyicon };

@@ -1,6 +1,6 @@
 import { Bell,Contact } from "lucide-react";
 import { Link } from "react-router-dom";
-import {StoryIcon} from '../components/StoryIcon.jsx'
+import {Storyicon} from './Storyicon.jsx'
 
 const UpperNavBar = () => {
   return (
@@ -8,7 +8,7 @@ const UpperNavBar = () => {
       {/* Left Section - Logo */}
       <div className="flex items-center space-x-2">
           <div className="p-2 bg-white/10 rounded-lg backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-all duration-300 active:scale-95">
-              <StoryIcon className="w-6 h-6 text-white" />
+              <Storyicon className="w-6 h-6 text-white" />
           </div>
           <h1 className="text-xl font-bold tracking-tighter bg-gradient-to-r from-red-400 via-blue-400 to-green-400 bg-clip-text text-transparent">
             NDP
