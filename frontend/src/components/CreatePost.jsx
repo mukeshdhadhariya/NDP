@@ -5,7 +5,7 @@ import axios from 'axios';
 import { clearAuthUser } from '../redux/authSlice.js';
 import { Link } from "react-router-dom";
 
-function CreatePost() {
+function Createpost() {
 
   const user = useSelector((state) => state.auth.user);
   const navigate = useNavigate();
@@ -58,4 +58,4 @@ function CreatePost() {
   );
 }
 
-export default CreatePost;
+export default Createpost;

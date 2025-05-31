@@ -1,7 +1,7 @@
 import { Home, Users, User } from "lucide-react";
 import { NavLink } from "react-router-dom";
 
-const LowerNavBar = () => {
+const Lowernavbar = () => {
   return (
   <nav className="fixed bottom-0 left-0 w-full bg-black/50 backdrop-blur-3xl border-t border-white/10 shadow-2xl shadow-blue-500/10 flex justify-around items-center py-3 h-16
     before:absolute before:inset-0 before:bg-gradient-to-t before:from-blue-500/10 before:via-blue-500/5 before:to-transparent before:pointer-events-none">
@@ -36,4 +36,4 @@ const LowerNavBar = () => {
   );
 };
 
-export default LowerNavBar;
+export default Lowernavbar;

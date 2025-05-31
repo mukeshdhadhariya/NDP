@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import axios from 'axios';
 import { Trash2 } from "lucide-react";
 
-function DeleteP() {
+function Deletep() {
 
     const [posts, setPosts] = useState([]);
     const [isFetched, setIsFetched] = useState(false);
@@ -121,4 +121,4 @@ return (
 
 }
 
-export default DeleteP
+export default Deletep

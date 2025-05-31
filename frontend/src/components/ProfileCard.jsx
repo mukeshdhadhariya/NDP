@@ -1,6 +1,6 @@
 import { FaInstagram, FaFacebook } from "react-icons/fa";
 
-const ProfileCard = ({image_url,name,jobprofile,about,i_id,f_id}) => {
+const Profilecard = ({image_url,name,jobprofile,about,i_id,f_id}) => {
   return (
 
   <div className="max-w-sm mx-auto bg-gradient-to-br from-white/10 to-indigo-500/10 backdrop-blur-lg shadow-2xl shadow-indigo-500/20 rounded-3xl overflow-hidden p-4 text-center transition-all duration-300 hover:scale-[1.02] hover:shadow-3xl hover:shadow-indigo-500/30 md:w-96 w-11/12 my-3 border border-white/20 group">
@@ -52,4 +52,4 @@ const ProfileCard = ({image_url,name,jobprofile,about,i_id,f_id}) => {
   );
 };
 
-export default ProfileCard;
+export default Profilecard;

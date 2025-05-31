@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-function CreateP() {
+function Createp() {
   const [caption, setCaption] = useState('');
   const [image, setImage] = useState(null);
   const [preview, setPreview] = useState('');
@@ -136,4 +136,4 @@ function CreateP() {
   );
 }
 
-export default CreateP;
+export default Createp;

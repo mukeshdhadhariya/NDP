@@ -5,7 +5,7 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { Trash2 } from "lucide-react";
 
-function DeleteU() {
+function Deleteu() {
   const navigate = useNavigate();
   const [users, setUsers] = useState([]);
   const [isFetched, setIsFetched] = useState(false); 
@@ -112,4 +112,4 @@ function DeleteU() {
   );
 }
 
-export default DeleteU;
+export default Deleteu;

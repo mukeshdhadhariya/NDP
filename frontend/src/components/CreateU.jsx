@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
 
-function CreateU() {
+function Createu() {
 
   const [loading, setLoading] = useState(false);
   const navigate=useNavigate();
@@ -198,4 +198,4 @@ function CreateU() {
   );
 }
 
-export default CreateU;
+export default Createu;

@@ -2,7 +2,7 @@ import { Bell,Contact } from "lucide-react";
 import { Link } from "react-router-dom";
 import {Storyicon} from './Storyicon.jsx'
 
-const UpperNavBar = () => {
+const Uppernavbar = () => {
   return (
   <nav className="z-50 fixed top-0 left-0 w-full bg-gradient-to-r from-gray-900 to-gray-800 backdrop-blur-lg border-b border-white/20 shadow-xl shadow-blue-500/10 flex items-center justify-between px-4 py-2 h-14">
       {/* Left Section - Logo */}
@@ -51,4 +51,4 @@ const UpperNavBar = () => {
   );
 };
 
-export default UpperNavBar;
+export default Uppernavbar;
