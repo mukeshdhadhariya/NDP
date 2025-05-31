@@ -23,7 +23,7 @@ const router=Router()
 
 router.route("/adminRegister").post(AdminRegister)
 router.route("/login").post(LoginUser)
-router.route("/logout").get(jwtVerfy,logout)
+router.route("/logout").post(jwtVerfy,logout)
 router.route("/createpost").post(jwtVerfy,upload.single("image"),CreatePost)
 router.route("/deletepost/:post_id").delete(jwtVerfy,DeletePost)
 router.route("/getallpost").get(getallpost)
