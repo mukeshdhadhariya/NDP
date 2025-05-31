@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Post from "./Post";
+import Post from "./Post1";
 import axios from "axios";
 import { Loader } from "lucide-react";
 

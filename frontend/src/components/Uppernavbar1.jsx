@@ -1,6 +1,6 @@
 import { Bell,Contact } from "lucide-react";
 import { Link } from "react-router-dom";
-import {Storyicon} from './Storyicon.jsx'
+import {Storyicon} from './Storyicon1.jsx'
 
 const Uppernavbar = () => {
   return (

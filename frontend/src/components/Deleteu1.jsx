@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import ProfileCard from "./Profilecard";
+import ProfileCard from "./Profilecard1";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { Trash2 } from "lucide-react";

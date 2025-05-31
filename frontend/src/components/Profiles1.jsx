@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import ProfileCard from "./Profilecard.jsx";
+import ProfileCard from "./Profilecard1.jsx";
 import { Trash2, Loader } from "lucide-react";
 import axios from "axios";
 

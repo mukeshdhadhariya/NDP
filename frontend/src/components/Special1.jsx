@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Specialcontainer } from './Specialcontainer';
+import { Specialcontainer } from './Specialcontainer1';
 
 function Special() {
     const navigate = useNavigate();

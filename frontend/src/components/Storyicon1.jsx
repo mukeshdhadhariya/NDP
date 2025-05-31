@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Imgurl } from "./Specialcontainer";
+import { Imgurl } from "./Specialcontainer1";
 
 const Storyicon = () => {
   return (
