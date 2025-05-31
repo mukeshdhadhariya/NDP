@@ -7,6 +7,7 @@ export const jwtVerfy=async (req,res,next)=>{
         console.log("1")
         const token=req.cookies?.token || req.header("Authorization")?.replace("Bearer ","")
         console.log("2")
+        console.log("token : ",token)
         if(!token){
             throw new ApiError(401,"Unauthorized request")
         }
