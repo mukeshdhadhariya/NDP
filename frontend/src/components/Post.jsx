@@ -9,6 +9,8 @@ function Post({ url, caption, id,createdAt }) {
   const [likesCount, setLikesCount] = useState(0);
   const [showHeartAnimation, setShowHeartAnimation] = useState(false);
 
+  const API_URI=import.meta.env.VITE_API_URL
+
   const formattedDate = new Date(createdAt).toLocaleDateString('en-US', {
   year: 'numeric',
   month: 'short',
@@ -18,7 +20,7 @@ function Post({ url, caption, id,createdAt }) {
   useEffect(() => {
     const fetchLikeStatus = async () => {
       try {
-        const res = await axios.get(`http://localhost:8000/api/v1/user/like/${id}`);
+        const res = await axios.get(`${API_URI}/api/v1/user/like/${id}`);
         setLiked(res.data.liked);
         setLikesCount(res.data.likes);
       } catch (err) {
@@ -30,7 +32,7 @@ function Post({ url, caption, id,createdAt }) {
 
   const toggleLike = async () => {
     try {
-      const res = await axios.get(`http://localhost:8000/api/v1/user/like/${id}`);
+      const res = await axios.get(`${API_URI}/api/v1/user/like/${id}`);
       setLikesCount(res.data.likes);
       setLiked(res.data.liked);
     } catch (error) {
