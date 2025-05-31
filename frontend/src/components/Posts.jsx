@@ -7,11 +7,12 @@ function Posts() {
   const [posts, setPosts] = useState(null);
   const [loading, setLoading] = useState(true);
 
+const API_URI=import.meta.env.VITE_API_URL
 
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const res = await axios.get("http://localhost:8000/api/v1/user/getallpost", {
+        const res = await axios.get(`${API_URI}/api/v1/user/getallpost`, {
           headers: {
             "Content-Type": "application/json",
           },

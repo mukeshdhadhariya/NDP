@@ -11,13 +11,15 @@ function CreatePost() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const API_URI=import.meta.env.VITE_API_URL
+
   if(!user){
     return <Navigate to="/login" replace/>
   }
 
   const LogoutHandler = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/api/v1/user/logout", { withCredentials: true });
+      const res = await axios.get(`${API_URI}/api/v1/user/logout`, { withCredentials: true });
       if (res.data.success) {
         navigate("/login");
       }

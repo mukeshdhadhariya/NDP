@@ -17,12 +17,14 @@ const AdminLogin = () => {
 
   const navigate=useNavigate()
 
+  const API_URI=import.meta.env.VITE_API_URL
+
 
   const loginHandler = async (e) => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        "http://localhost:8000/api/v1/user/login",
+        `${API_URI}/api/v1/user/login`,
         { AdminName, password }, 
         {
           headers: {

@@ -12,6 +12,8 @@ function DeleteU() {
 
   const adminUser = useSelector((state) => state.auth.user);
 
+  const API_URI=import.meta.env.VITE_API_URL
+
   if(!adminUser){
     return navigate("/login");
   }
@@ -19,14 +21,13 @@ function DeleteU() {
 
   const handleDelete = async (user_id) => {
     try {
-      await axios.delete(`http://localhost:8000/api/v1/user/deleteuser/${user_id}`, {
+      await axios.delete(`${API_URI}/api/v1/user/deleteuser/${user_id}`, {
         headers: { "Content-Type": "application/json" },
         withCredentials: true,
       });
   
       console.log("User deleted successfully");
   
-      // Remove user from state to update UI
       setUsers((prevUsers) => prevUsers.filter(user => user._id !== user_id));
   
     } catch (error) {
@@ -34,13 +35,10 @@ function DeleteU() {
     }
   };
   
-
-  
-
   const handleUser = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.get("http://localhost:8000/api/v1/user/getalluser", {
+      const res = await axios.get(`${API_URI}/api/v1/user/getalluser`, {
         headers: {
           "Content-Type": "application/json",
         },

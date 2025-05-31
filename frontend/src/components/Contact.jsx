@@ -10,13 +10,15 @@ export default function MessageForm() {
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const API_URI=import.meta.env.VITE_API_URL
+
   const messageHandle = async (e) => {
     e.preventDefault(); 
     setLoading(true); 
 
     try {
       const res = await axios.post(
-        "http://localhost:8000/api/v1/user/sendmail",
+        `${API_URI}/api/v1/user/sendmail`,
         { senderName, message }, 
         {
           headers: { "Content-Type": "application/json" },

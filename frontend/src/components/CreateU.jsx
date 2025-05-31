@@ -27,6 +27,7 @@ function CreateU() {
     setFormData({ ...formData, file: e.target.files[0] });
   };
 
+  const API_URI=import.meta.env.VITE_API_URL
 
   const handleSubmit = async (e) => {
     
@@ -44,7 +45,7 @@ function CreateU() {
 
     try {
       const res = await axios.post(
-        "http://localhost:8000/api/v1/user/createuser",
+        `${API_URI}/api/v1/user/createuser`,
         formDataToSend,
         {
           headers: {

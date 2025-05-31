@@ -7,8 +7,9 @@ import { Trash2 } from "lucide-react";
 function DeleteP() {
 
     const [posts, setPosts] = useState([]);
-    const [isFetched, setIsFetched] = useState(false); 
+    const [isFetched, setIsFetched] = useState(false);
 
+    const API_URI=import.meta.env.VITE_API_URL
 
     const adminUser = useSelector((state) => state.auth.user);
 
@@ -16,46 +17,29 @@ function DeleteP() {
       return navigate("/login");
     }
 
-  //   const handleDelete = async ({post_id}) => {
-  //   try {
-  //     await axios.delete(`http://localhost:8000/api/v1/user//deletepost/${post_id}`, {
-  //       headers: { "Content-Type": "application/json" },
-  //       withCredentials: true,
-  //     });
-  
-  //     console.log("Post deleted successfully");
-  
-  //     setPosts((prevUsers) => prevUsers.filter(post => post._id !== post_id));
-  
-  //   } catch (error) {
-  //     console.error("Error:", error.response ? error.response.data : error.message);
-  //   }
-  // };
+    const handleDelete = async (post_id) => {
+      if (!post_id) {
+        console.error("Post ID is undefined or null");
+        return;
+      }
 
-      const handleDelete = async (post_id) => {
-        if (!post_id) {
-          console.error("Post ID is undefined or null");
-          return;
-        }
+      try {
+        await axios.delete(`${API_URI}/api/v1/user/deletepost/${post_id}`, {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        });
 
-        try {
-          await axios.delete(`http://localhost:8000/api/v1/user/deletepost/${post_id}`, {
-            headers: { "Content-Type": "application/json" },
-            withCredentials: true,
-          });
-
-          console.log("Post deleted successfully");
-          setPosts((prevPosts) => prevPosts.filter(post => post._id !== post_id));
-        } catch (error) {
-          console.error("Error:", error.response ? error.response.data : error.message);
-        }
-      };
-
+        console.log("Post deleted successfully");
+        setPosts((prevPosts) => prevPosts.filter(post => post._id !== post_id));
+      } catch (error) {
+        console.error("Error:", error.response ? error.response.data : error.message);
+      }
+    };
 
     const handleUser = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.get("http://localhost:8000/api/v1/user/getallpost", {
+      const res = await axios.get(`${API_URI}/api/v1/user/getallpost`, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -70,8 +54,6 @@ function DeleteP() {
       console.error("Error:", error.response ? error.response.data : error.message);
     }
     };
-
-
 
 return (
   <div className="relative w-full h-[92vh] flex flex-col items-center justify-center text-white text-lg font-semibold">

@@ -1,10 +1,9 @@
 import { useState, useMemo, useEffect } from 'react';
 import axios from 'axios';
 
-// Grouping messages by date
 const groupMessagesByDate = (messages) => {
   return messages.reduce((acc, msg) => {
-    const dateKey = new Date(msg.createdAt).toDateString(); // e.g., "Mon May 27 2025"
+    const dateKey = new Date(msg.createdAt).toDateString();
     if (!acc[dateKey]) acc[dateKey] = [];
     acc[dateKey].push(msg);
     return acc;
@@ -15,6 +14,8 @@ const MessageBoard = () => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
 
+    const API_URI=import.meta.env.VITE_API_URL
+
   const pinnedMessage = useMemo(() => ({
     id: 0,
     msg: "📌 Welcome to our community board! Please read the guidelines before posting.",
@@ -24,7 +25,7 @@ const MessageBoard = () => {
 
   const fetchMessages = async () => {
     try {
-      const res = await axios.get('http://localhost:8000/api/v1/user/getallmsg', {
+      const res = await axios.get(`${API_URI}/api/v1/user/getallmsg`, {
         headers: { "Content-Type": "application/json" },
         withCredentials: true,
       });
@@ -41,7 +42,7 @@ const MessageBoard = () => {
   const handleSend = async () => {
     if (!newMessage.trim()) return;
     try {
-      await axios.post('http://localhost:8000/api/v1/user/createmsg', {
+      await axios.post(`${API_URI}/api/v1/user/createmsg`, {
         msg: newMessage
       }, {
         headers: { "Content-Type": "application/json" },

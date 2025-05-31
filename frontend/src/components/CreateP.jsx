@@ -7,6 +7,8 @@ function CreateP() {
   const [preview, setPreview] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const API_URI=import.meta.env.VITE_API_URL
+
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -24,7 +26,7 @@ function CreateP() {
       formData.append('image', image);
       formData.append('caption', caption);
 
-      const res=await axios.post('http://localhost:8000/api/v1/user/createpost',
+      const res=await axios.post(`${API_URI}/api/v1/user/createpost`,
         formData,
         {
         headers: {

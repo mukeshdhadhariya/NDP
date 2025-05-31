@@ -7,10 +7,12 @@ function Profiles() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const API_URI=import.meta.env.VITE_API_URL
+
   const fetchUsers = async () => {
     setLoading(true);
     try {
-      const res = await axios.get("http://localhost:8000/api/v1/user/getalluser", {
+      const res = await axios.get(`${API_URI}/api/v1/user/getalluser`, {
         headers: { "Content-Type": "application/json" },
         withCredentials: true,
       });
