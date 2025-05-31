@@ -6,7 +6,7 @@ const Specialcontainer = () => {
   return (
     <div className="w-[80vw] sm:w-[70vw] h-[60vh] sm:h-[60vh] mt-10 flex flex-col items-center justify-center">
       <img
-        src={imgurl}
+        src={Imgurl}
         alt="Centered Image"
         className="w-full max-w-[90%] sm:max-w-[85%] ml-auto object-contain pointer-events-none"
       />
