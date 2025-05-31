@@ -5,14 +5,14 @@ import { Admin } from "../models/admin.js"
 export const jwtVerfy=async (req,res,next)=>{
     try {
         console.log("1")
-        const token=req.cookies?.token || req.header("Authorization")?.replace("Bearer ","")
+        const Token=req.cookies?.token || req.header("Authorization")?.replace("Bearer ","")
         console.log("2")
-        if(!token){
+        if(!Token){
             throw new ApiError(401,"Unauthorized request")
         }
         
         console.log("3")
-        const decodedToken=jwt.verify(token,process.env.TOKEN_SECRATE)
+        const decodedToken=jwt.verify(Token,process.env.TOKEN_SECRATE)
         console.log("4")
     
         const user=await Admin.findById(decodedToken?._id).select(
