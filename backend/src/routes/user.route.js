@@ -13,7 +13,8 @@ import {
     PostLike,
     CreateMgs,
     getallmessage,
-    PostLikeCnt
+    PostLikeCnt,
+    Ping
 } from "../controller/user.controller.js"
 
 import { upload } from "../middleware/multer.js"
@@ -35,5 +36,6 @@ router.route("/like/:postId").post(PostLike)
 router.route("/likecnt/:postId").get(PostLikeCnt)
 router.route("/createmsg").post(CreateMgs)
 router.route("/getallmsg").get(getallmessage)
+router.route("/ping").get(Ping)
 
 export default router

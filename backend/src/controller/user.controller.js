@@ -399,6 +399,10 @@ const getallmessage = async (req, res) => {
   }
 };
 
+const Ping=(req, res) => {
+  res.json({ status: "ok" });
+}
+
 
 
 export {
@@ -415,5 +419,6 @@ export {
     PostLike,
     getallmessage,
     CreateMgs,
-    PostLikeCnt
+    PostLikeCnt,
+    Ping
 }
