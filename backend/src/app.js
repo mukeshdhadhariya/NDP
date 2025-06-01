@@ -19,5 +19,10 @@ import userRouter from "./routes/user.route.js"
 
 app.use("/api/v1/user",userRouter)
 
+app.get('/api/v1/user/ping', (req, res) => {
+  res.json({ status: "ok" });
+});
+
+
 
 export {app}
