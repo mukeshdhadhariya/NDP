@@ -9,15 +9,14 @@ import nodemailer from 'nodemailer'
 import {Message} from '../models/message.js'
 import Redis from 'ioredis';
 
-// const redis = new Redis({
-//     host:process.env.REDIS_HOST,
-//     port:process.env.REDIS_PORT,
-//     password:process.env.REDIS_PASSWORD,
-//     tls: {},
-//     maxRetriesPerRequest: 20,
-// });
+const redis = new Redis({
+    host:process.env.REDIS_HOST,
+    port:process.env.REDIS_PORT,
+    password:process.env.REDIS_PASSWORD,
+    tls: {},
+    maxRetriesPerRequest: 20,
+});
 
-const redis = new Redis("redis://localhost:6379");
 
 const AdminRegister = async (req, res) => {
     try {
