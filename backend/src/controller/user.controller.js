@@ -7,8 +7,15 @@ import cloudinary from "cloudinary"
 import { User } from "../models/user.js";
 import nodemailer from 'nodemailer'
 import {Message} from '../models/message.js'
+import Redis from 'ioredis';
 
-
+const redis = new Redis({
+    host:process.env.REDIS_HOST,
+    port:process.env.REDIS_PORT,
+    password:process.env.REDIS_PASSWORD,
+    tls: {},
+    maxRetriesPerRequest: 20,
+});
 
 const AdminRegister = async (req, res) => {
     try {
@@ -219,11 +226,22 @@ const DeletePost=async(req,res,next)=>{
 const getallpost=async(req,res)=>{
    try {
 
+    const catched=await redis.get('blogs')
+
+    if(catched){
+        const parsedData = JSON.parse(catched);
+        return res.status(200).json(
+            new ApiResponce(200,parsedData,"From Redis Cache")
+        )
+    }
+
     const posts = await Post.find().sort({ createdAt: -1 });
 
     if(!posts){
         throw new ApiError(401,"null posts")
     }
+
+    redis.set('blogs', JSON.stringify(posts), 'EX', 150);
 
     return res.status(200).json(
         new ApiResponce(200,posts,"fetch all posts")
